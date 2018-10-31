@@ -37,8 +37,9 @@ namespace SportsStore.WebUI.DependencyResolution
 
                });
             For<IProductRepository>().Use<EFProductRepository>();
+            For<IOrderProcessor>().Use<EmailOrderProcessor>();
             //For<IExample>().Use<Example>();
-               
+
         }
         #endregion
     }

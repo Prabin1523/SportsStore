@@ -28,7 +28,8 @@ namespace SportsStore.WebUI.DependencyResolution {
     using SportsStore.Domain.Abstract;
     using SportsStore.Domain.Entities;
     using SportsStore.Domain.Concrete;
-	
+    using System.Configuration;
+
     /// <summary>
     /// The structure map dependency scope.
     /// </summary>
@@ -48,7 +49,12 @@ namespace SportsStore.WebUI.DependencyResolution {
                 throw new ArgumentNullException("Container");
             }
             Container = container;
-            //AddBindings(container);
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+            container.Inject<EmailSettings>(emailSettings);
+
         }
         #endregion
 
